@@ -1,16 +1,23 @@
 import './style.scss';
 
+//@ts-ignore
 import { throttle } from "https://cdn.skypack.dev/lodash@4.17.20";
 
 class Carousel {
-  static getDest(element) {
+  static getDest(element: Element | EventTarget): Element | undefined {
     if (!(element instanceof Element)) return;
     if (element === document.documentElement) return;
-    if (element.classList.contains("destination")) return element;
+    if (element.classList.contains("destination")) {
+        return element
+    };
     return Carousel.getDest(element.parentElement);
   }
 
-  constructor(element) {
+  private wrapperElement: HTMLElement;
+  private dests: Element[];
+  private active: number;
+
+  constructor(element: HTMLElement) {
     this.wrapperElement = element;
     this.dests = [...element.querySelectorAll(".destination")];
     this.active = null;
@@ -33,7 +40,7 @@ class Carousel {
     );
   }
 
-  getIndex(dest) {
+  getIndex(dest: Element) {
     if (!this.dests.includes(dest)) return;
     let i = 0;
     for (let currentDest of this.dests) {
@@ -44,7 +51,7 @@ class Carousel {
     }
   }
 
-  activate(dest) {
+  activate(dest: Element) {
     this.active = this.getIndex(dest) ?? null;
     this.update();
   }
@@ -55,7 +62,7 @@ class Carousel {
   }
 
   update() {
-    this.dests.forEach((dest, index) => {
+    this.dests.forEach((dest: Element, index: number) => {
       dest.className = "destination";
 
       if (index === this.active) {
@@ -73,7 +80,7 @@ class Carousel {
   }
 }
 
-function isOdd(value) {
+function isOdd(value: number) {
   return value % 2 === 0;
 }
 
