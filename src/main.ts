@@ -33,7 +33,7 @@ class Carousel {
         });
 
         this.wrapperElement.addEventListener("mouseleave", throttle((event) => {
-            console.log("mouseleave happening");
+            //console.log("mouseleave happening");
             if (event.target === this.wrapperElement) {
                 this.deactivate();
             }

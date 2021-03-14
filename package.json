@@ -1,10 +1,14 @@
 {
   "name": "scroller-folding",
-  "version": "0.0.0",
+  "description": "Vanilla JS scroller with folding images",
+  "license": "MIT",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.168",
