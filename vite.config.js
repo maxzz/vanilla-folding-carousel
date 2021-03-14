@@ -1,7 +1,7 @@
 import { defineConfig } from "vite"
 import pug from 'vite-plugin-pug';
 
-export default (mode, command) => {
+export default ({mode, command}) => {
     let commonConfig = defineConfig({
         plugins: [
             pug()
