@@ -1,2 +1,13 @@
-h1 Hello World
-p I'm a cool Vite project!
+mixin Destination(name, caption, photo)
+  .destination.folded
+    h1= name
+    hr
+    p.caption= caption
+    button Discover
+    img(src=photo, alt=`Beautiful ${name}`)
+
+.wrapper.loading
+  +Destination("Iceland", "Fire and ice", "https://source.unsplash.com/ABtmE3jhaPQ/800x600")
+  +Destination("Canada", "Genuine wilderness", "https://source.unsplash.com/DlkF4-dbCOU/800x600")
+  +Destination("Norway", "Arctic gateway", "https://source.unsplash.com/6f_ANCcbj3o/800x600")
+  +Destination("Greenland", "Epic landscapes", "https://source.unsplash.com/iWIDgeUbskQ/800x600")
