@@ -1,16 +1,15 @@
 import './style.scss';
-
-//@ ts-ignore
-// import { throttle } from "https://cdn.skypack.dev/lodash@4.17.20";
 import throttle from 'lodash/throttle';
+//@ ts-ignore // import { throttle } from "https://cdn.skypack.dev/lodash@4.17.20";
 
 class Carousel {
-    static getDest(element: Element | EventTarget): Element | undefined {
-        if (!(element instanceof Element)) return;
-        if (element === document.documentElement) return;
+    static getDest(element: Element): Element | undefined {
+        if (!element || element === document.documentElement) {
+            return;
+        }
         if (element.classList.contains("destination")) {
-            return element
-        };
+            return element;
+        }
         return Carousel.getDest(element.parentElement);
     }
 
@@ -26,22 +25,24 @@ class Carousel {
         this.wrapperElement.classList.remove("loading");
 
         this.wrapperElement.addEventListener("mouseover", (event) => {
-            const dest = Carousel.getDest(event.target);
-            if (typeof dest === "undefined") return;
-            if (dest === this.dests[this.active]) return;
+            const dest = Carousel.getDest(event.target as Element);
+            if (!dest || dest === this.dests[this.active]) {
+                return;
+            }
             this.activate(dest);
         });
 
         this.wrapperElement.addEventListener("mouseleave", throttle((event) => {
-            //console.log("mouseleave happening");
             if (event.target === this.wrapperElement) {
                 this.deactivate();
             }
         }, 500));
     }
 
-    getIndex(dest: Element) {
-        if (!this.dests.includes(dest)) return;
+    getIndex(dest: Element): number {
+        if (!this.dests.includes(dest)) {
+            return;
+        }
         let i = 0;
         for (let currentDest of this.dests) {
             if (dest === currentDest) {
@@ -51,17 +52,17 @@ class Carousel {
         }
     }
 
-    activate(dest: Element) {
+    activate(dest: Element): void {
         this.active = this.getIndex(dest) ?? null;
         this.update();
     }
 
-    deactivate() {
+    deactivate(): void {
         this.active = null;
         this.update();
     }
 
-    update() {
+    update(): void {
         this.dests.forEach((dest: Element, index: number) => {
             dest.className = "destination";
 
