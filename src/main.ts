@@ -1,7 +1,8 @@
 import './style.scss';
 
-//@ts-ignore
-import { throttle } from "https://cdn.skypack.dev/lodash@4.17.20";
+//@ ts-ignore
+// import { throttle } from "https://cdn.skypack.dev/lodash@4.17.20";
+import throttle from 'lodash/throttle';
 
 class Carousel {
     static getDest(element: Element | EventTarget): Element | undefined {

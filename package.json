@@ -11,5 +11,8 @@
     "sass": "^1.32.8",
     "vite": "^2.0.5",
     "vite-plugin-pug": "^0.1.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
